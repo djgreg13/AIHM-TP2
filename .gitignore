@@ -21,3 +21,4 @@ cache/
 #ECLIPSE
 .classpath
 .project
+.settings

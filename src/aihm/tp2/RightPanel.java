@@ -4,6 +4,8 @@
  */
 package aihm.tp2;
 import java.awt.BorderLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
@@ -16,7 +18,7 @@ import javax.swing.JTextField;
  *
  * @author greg
  */
-public class RightPanel extends JPanel {
+public class RightPanel extends JPanel implements ActionListener{
 	
 	private JTextField elevatorStage;
 	
@@ -36,17 +38,17 @@ public class RightPanel extends JPanel {
 		
 		JButton button0 = new JButton(new ImageIcon("img/Zero.png" ));
 	    button0.setSelectedIcon(new ImageIcon("img/ZeroSelected.png" ));
-	    //button2.addActionListener(new SelectButton());
+	    button0.addActionListener(new SelectButton());
 	    button0.setName("0");
 	    
 	    JButton button1 = new JButton(new ImageIcon("img/One.png" ));
 	    button1.setSelectedIcon(new ImageIcon("img/OneSelected.png" ));
-	    //button2.addActionListener(new SelectButton());
+	    button1.addActionListener(new SelectButton());
 	    button1.setName("1");
 		
 		JButton button2 = new JButton(new ImageIcon("img/Two.png" ));
 	    button2.setSelectedIcon(new ImageIcon("img/TwoSelected.png" ));
-	    //button2.addActionListener(new SelectButton());
+	    button2.addActionListener(new SelectButton());
 	    button2.setName("2");
 	    
 	    
@@ -58,6 +60,21 @@ public class RightPanel extends JPanel {
 	    this.add(buttonsPanel, BorderLayout.CENTER);
 	    
 	    
+	}
+	
+	class SelectButton implements ActionListener
+	{
+		public void actionPerformed(ActionEvent e) {
+			JButton button = (JButton) e.getSource();
+			button.setSelected(!button.isSelected());
+			String etat = (button.isSelected())? "selectionné" : "déselectionné";
+		}
+	}
+
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		// TODO Auto-generated method stub
+		
 	}
     
 }
