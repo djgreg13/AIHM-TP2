@@ -66,8 +66,10 @@ public class RightPanel extends JPanel implements ActionListener{
 	{
 		public void actionPerformed(ActionEvent e) {
 			JButton button = (JButton) e.getSource();
-			button.setSelected(!button.isSelected());
-			String etat = (button.isSelected())? "selectionné" : "déselectionné";
+			button.setSelected(true);
+			//String etat = (button.isSelected())? "selectionné" : "déselectionné";
+			int stage = Integer.parseInt(button.getName()); 
+			AIHMTP2.elevator.goToStage(stage);
 		}
 	}
 

@@ -11,16 +11,23 @@ import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 
+import aihm.elevalor.Elevator;
+
 /**
  *
  * @author greg
  */
 public class AIHMTP2 {
+	
+	public static Elevator elevator = new Elevator();
 
     /**
      * @param args the command line arguments
      */
     public static void main(String[] args) {
+    	
+    	
+    	
         SwingUtilities.invokeLater(new Runnable() {
             @Override
             public void run() {
