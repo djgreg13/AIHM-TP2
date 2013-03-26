@@ -16,3 +16,8 @@ nb-configuration.xml
 
 # Cache files #
 cache/
+
+
+#ECLIPSE
+.classpath
+.project
