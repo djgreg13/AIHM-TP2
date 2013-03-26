@@ -97,9 +97,10 @@ public class Elevator {
 	public void propertyChange()
 	{
 		Iterator<Object> it = controllers.iterator(); 
-		while(it.hasNext()){
-			ElevatorButton button = (ElevatorButton) it.next();
-			button.propertyChange();
+		while(it.hasNext())
+		{
+			ElevatorController controller = (ElevatorController) it.next();
+			controller.propertyChange();
 		}
 	}
 

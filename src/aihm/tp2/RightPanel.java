@@ -14,11 +14,13 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+import aihm.elevalor.ElevatorController;
+
 /**
  *
  * @author greg
  */
-public class RightPanel extends JPanel implements ActionListener{
+public class RightPanel extends JPanel implements ActionListener, ElevatorController{
 	
 	private JTextField elevatorStage;
 	
@@ -47,24 +49,6 @@ public class RightPanel extends JPanel implements ActionListener{
 		AIHMTP2.elevator.addController(button0);
 		AIHMTP2.elevator.addController(button1);
 		AIHMTP2.elevator.addController(button2);
-		
-		
-		/*JButton button0 = new JButton(new ImageIcon("img/Zero.png" ));
-	    button0.setSelectedIcon(new ImageIcon("img/ZeroSelected.png" ));
-	    button0.addActionListener(new SelectButton());
-	    button0.setName("0");
-	    
-	    JButton button1 = new JButton(new ImageIcon("img/One.png" ));
-	    button1.setSelectedIcon(new ImageIcon("img/OneSelected.png" ));
-	    button1.addActionListener(new SelectButton());
-	    button1.setName("1");
-		
-		JButton button2 = new JButton(new ImageIcon("img/Two.png" ));
-	    button2.setSelectedIcon(new ImageIcon("img/TwoSelected.png" ));
-	    button2.addActionListener(new SelectButton());
-	    button2.setName("2");
-	    */
-	    
 	    
 	    buttonsPanel.add(title, BorderLayout.NORTH);
 		buttonsPanel.add(this.elevatorStage);
@@ -73,7 +57,7 @@ public class RightPanel extends JPanel implements ActionListener{
 	    buttonsPanel.add(button0);
 	    this.add(buttonsPanel, BorderLayout.CENTER);
 	    
-	    
+	    AIHMTP2.elevator.addController(this);
 	}
 	
 	
@@ -82,6 +66,11 @@ public class RightPanel extends JPanel implements ActionListener{
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
 		
+	}
+	
+	public void propertyChange()
+	{
+		this.elevatorStage.setText(""+AIHMTP2.elevator.getActualStage());
 	}
     
 }

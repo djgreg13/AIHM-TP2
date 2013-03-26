@@ -10,8 +10,9 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 
 import aihm.elevalor.Elevator;
+import aihm.elevalor.ElevatorController;
 
-public class ElevatorButton extends JButton implements ActionListener {
+public class ElevatorButton extends JButton implements ActionListener, ElevatorController {
 	
 	private int stage;
 	private Elevator elevator;
