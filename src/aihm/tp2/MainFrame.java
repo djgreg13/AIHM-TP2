@@ -35,10 +35,8 @@ public class MainFrame extends JFrame {
 
     private JSplitPane panel;
     //Boutons
-    protected JToggleButton btn1, btn2, btn3; // left panel
-    protected JToggleButton btnt1, btnt2, btnt3; //toolbar
+    protected ElevatorButton btn0, btn1, btn2; // left panel
     protected JLabel text1;
-    protected ImageIcon ico1, ico2, ico3, icos1, icos2, icos3;
     protected JToolBar toolBar;
     
     protected List<JToggleButton> buttons;
@@ -85,50 +83,21 @@ public class MainFrame extends JFrame {
     }
 
     private void addToolBarButtons(JComponent p) {
-        btnt1 = new JToggleButton();
-        btnt2 = new JToggleButton();
-        btnt3 = new JToggleButton();
+            btn0 = new ElevatorButton(0);
+            btn1 = new ElevatorButton(1);
+            btn2 = new ElevatorButton(2);
+            
+            btn0.setElevator(AIHMTP2.elevator);
+            btn1.setElevator(AIHMTP2.elevator);
+            btn2.setElevator(AIHMTP2.elevator);   
+            
+            AIHMTP2.elevator.addController(btn0);
+            AIHMTP2.elevator.addController(btn1);
+            AIHMTP2.elevator.addController(btn2);
 
-
-        //Nom
-
-        btnt1.setName("1");
-        btnt2.setName("2");
-        btnt3.setName("3");
-
-
-        //Icones
-
-        ico1 = new ImageIcon("img/One.png");
-        ico2 = new ImageIcon("img/Two.png");
-        ico3 = new ImageIcon("img/Three.png");
-        icos1 = new ImageIcon("img/OneSelected.png");
-        icos2 = new ImageIcon("img/TwoSelected.png");
-        icos3 = new ImageIcon("img/ThreeSelected.png");
-
-        btnt1.setIcon(ico1);
-        btnt2.setIcon(ico2);
-        btnt3.setIcon(ico3);
-        btnt1.setSelectedIcon(icos1);
-        btnt2.setSelectedIcon(icos2);
-        btnt3.setSelectedIcon(icos3);
-
-        //Listeners
-
-
-        btnt1.addActionListener(new ButtonListener());
-        btnt2.addActionListener(new ButtonListener());
-        btnt3.addActionListener(new ButtonListener());
-
-        //Ajout des composants sur le conteneur
-        p.add(btnt1);
-        p.add(btnt2);
-        p.add(btnt3);
-
-        buttons.add(btnt1);
-        buttons.add(btnt2);
-        buttons.add(btnt3);
-
+            p.add(btn0);
+            p.add(btn1);
+            p.add(btn2);
     }
 
     class ButtonListener implements ActionListener {

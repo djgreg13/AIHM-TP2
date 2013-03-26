@@ -8,6 +8,8 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComponent;
@@ -23,7 +25,7 @@ public class LeftPanel extends JPanel {
 
     LeftPanel() {
         super();
-        init();
+       init();
     }
 
     private void init() {
@@ -49,8 +51,7 @@ public class LeftPanel extends JPanel {
     }
 
     private class Child extends JPanel {
-            protected JButton btn0, btn1, btn2; // left panel
-            protected ImageIcon ico1, icos1;
+            protected ElevatorButton btn0, btn1, btn2; // left panel
         Child() {
             super();
             init();
@@ -65,29 +66,17 @@ public class LeftPanel extends JPanel {
         
         private void addButtons(JComponent p)
         {
-            btn0 = new JButton();
-            btn1 = new JButton();
-            btn2 = new JButton();
-
-
-            //Nom
-
-            btn0.setName("1");
-            btn1.setName("2");
-            btn2.setName("3");
-
-
-            //Icones
-
-            ico1 = new ImageIcon("img/Call.png");
-            icos1 = new ImageIcon("img/CallSelected.png");
-
-            btn0.setIcon(ico1);
-            btn1.setIcon(ico1);
-            btn2.setIcon(ico1);
-            btn0.setSelectedIcon(icos1);
-            btn1.setSelectedIcon(icos1);
-            btn2.setSelectedIcon(icos1);
+            btn0 = new ElevatorButton(0,true);
+            btn1 = new ElevatorButton(1,true);
+            btn2 = new ElevatorButton(2,true);
+            
+            btn0.setElevator(AIHMTP2.elevator);
+            btn1.setElevator(AIHMTP2.elevator);
+            btn2.setElevator(AIHMTP2.elevator);   
+            
+            AIHMTP2.elevator.addController(btn0);
+            AIHMTP2.elevator.addController(btn1);
+            AIHMTP2.elevator.addController(btn2);
 
             p.add(btn0);
             p.add(btn1);
@@ -107,9 +96,9 @@ public class LeftPanel extends JPanel {
             
             g.drawLine(40,210,44,210);
             
-            btn0.setBounds(170,60,40,40);
+            btn2.setBounds(170,60,40,40);
             btn1.setBounds(170,160,40,40);
-            btn2.setBounds(170,260,40,40);
+            btn0.setBounds(170,260,40,40);
             
             paintCabine(g);
         }
@@ -139,4 +128,18 @@ public class LeftPanel extends JPanel {
             
         }
     }
+    
+    public void notifyEtage()
+    {
+        
+    }
+    
+ 	class SelectButton implements ActionListener
+	{
+		public void actionPerformed(ActionEvent e) {
+			JButton button = (JButton) e.getSource();
+			button.setSelected(true);
+			String etat = "selectionné";
+		}
+	}
 }
