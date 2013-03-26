@@ -70,8 +70,11 @@ public class MainFrame extends JFrame {
         this.getContentPane().add(panel, BorderLayout.CENTER);
 
         //PanneauGauche
-        JPanel pg = new LeftPanel();
+        LeftPanel pg = new LeftPanel();
         panel.setLeftComponent(pg);
+        pg.setElevator(AIHMTP2.elevator);
+        AIHMTP2.elevator.addController(pg);
+        
         /*pg.setMinimumSize(new Dimension(100,400));
         panel.setLeftComponent(pg);
         pg.setLayout(new BoxLayout(pg, BoxLayout.Y_AXIS));*/

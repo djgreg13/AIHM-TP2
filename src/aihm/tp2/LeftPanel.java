@@ -4,24 +4,35 @@
  */
 package aihm.tp2;
 
+import aihm.elevalor.Elevator;
+import aihm.elevalor.ElevatorController;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComponent;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JToggleButton;
+import javax.swing.Timer;
 
 /**
  *
  * @author greg
  */
-public class LeftPanel extends JPanel {
+public class LeftPanel extends JPanel implements ElevatorController {
+    private Elevator elevator;
+    private int MAXETAGE = 2;
+    private int etage = 0;
+    private int nextEtage = 0;
+    private int i=0;
+    private int offset = 0;
 
     LeftPanel() {
         super();
@@ -50,6 +61,59 @@ public class LeftPanel extends JPanel {
         this.add(elevator, BorderLayout.CENTER);
     }
 
+        @Override
+        public void propertyChange() {
+            this.modelPropertyChange();
+        }
+    
+    	public void modelPropertyChange()
+	{
+            if(this.nextEtage==this.etage)
+            {
+                int stage = elevator.getNextStage();
+                    if(stage!=etage)
+                        changeEtage(stage);
+            }
+	}
+        public void changeEtage(int stage)
+        {
+            this.nextEtage=stage;
+            Timer timer = new Timer(10,new EventMove());
+            timer.start();
+            //elevator.setActualStage(stage);
+        }
+        
+        private class EventMove implements ActionListener
+        {
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            i++;
+            if(etage<nextEtage)
+            {
+                offset=-i;
+                System.out.println("je dois monter");
+                repaint();
+            } else
+            {
+                offset=i;
+                repaint();
+                System.out.println("je dois descendre");
+            }
+            Timer t = (Timer)e.getSource();
+            if(i==100*Math.abs(nextEtage-etage))
+            {
+                i=0;
+                offset=0;
+                t.stop();
+                etage=nextEtage;
+                elevator.setActualStage(etage);
+                elevator.propertyChange();
+                repaint();
+            }
+        }
+            
+        }
     private class Child extends JPanel {
             protected ElevatorButton btn0, btn1, btn2; // left panel
         Child() {
@@ -105,34 +169,35 @@ public class LeftPanel extends JPanel {
         
         private void paintCabine(Graphics g)
         {
-            int MAXETAGE = 2;
-            int etage = 0;
             
             //cabine
             g.setColor(Color.cyan);;
-            g.fillRect(42,12+(MAXETAGE-etage)*100,106,96);
+            g.fillRect(42,12+(MAXETAGE-etage)*100+offset,106,96);
             g.setColor(Color.BLACK);
-            g.drawRect(42,12+(MAXETAGE-etage)*100,106,96);
+            g.drawRect(42,12+(MAXETAGE-etage)*100+offset,106,96);
             
             //porte gauche
             g.setColor(Color.yellow);;
-            g.fillRect(42,12+(MAXETAGE-etage)*100,106/2-1,96);
+            g.fillRect(42,12+(MAXETAGE-etage)*100+offset,106/2-1,96);
             g.setColor(Color.BLACK);
-            g.drawRect(42,12+(MAXETAGE-etage)*100,106/2-1,96);
+            g.drawRect(42,12+(MAXETAGE-etage)*100+offset,106/2-1,96);
             
             //porte gauche
             g.setColor(Color.yellow);;
-            g.fillRect(42+(106/2+1),12+(MAXETAGE-etage)*100,(106/2-1),96);
+            g.fillRect(42+(106/2+1),12+(MAXETAGE-etage)*100+offset,(106/2-1),96);
             g.setColor(Color.BLACK);
-            g.drawRect(42+(106/2+1),12+(MAXETAGE-etage)*100,(106/2-1),96);
+            g.drawRect(42+(106/2+1),12+(MAXETAGE-etage)*100+offset,(106/2-1),96);
             
         }
     }
     
-    public void notifyEtage()
-    {
-        
-    }
+	public Elevator getElevator() {
+		return elevator;
+	}
+
+	public void setElevator(Elevator elevator) {
+		this.elevator = elevator;
+	}
     
  	class SelectButton implements ActionListener
 	{
