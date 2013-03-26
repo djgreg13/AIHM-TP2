@@ -36,7 +36,20 @@ public class RightPanel extends JPanel implements ActionListener{
 		JPanel buttonsPanel = new JPanel();
 		buttonsPanel.setLayout(new BoxLayout(buttonsPanel, BoxLayout.PAGE_AXIS));
 		
-		JButton button0 = new JButton(new ImageIcon("img/Zero.png" ));
+		ElevatorButton button0 = new ElevatorButton(0);
+		ElevatorButton button1 = new ElevatorButton(1);
+		ElevatorButton button2 = new ElevatorButton(2);
+		
+		button0.setElevator(AIHMTP2.elevator);
+		button1.setElevator(AIHMTP2.elevator);
+		button2.setElevator(AIHMTP2.elevator);
+		
+		AIHMTP2.elevator.addController(button0);
+		AIHMTP2.elevator.addController(button1);
+		AIHMTP2.elevator.addController(button2);
+		
+		
+		/*JButton button0 = new JButton(new ImageIcon("img/Zero.png" ));
 	    button0.setSelectedIcon(new ImageIcon("img/ZeroSelected.png" ));
 	    button0.addActionListener(new SelectButton());
 	    button0.setName("0");
@@ -50,6 +63,7 @@ public class RightPanel extends JPanel implements ActionListener{
 	    button2.setSelectedIcon(new ImageIcon("img/TwoSelected.png" ));
 	    button2.addActionListener(new SelectButton());
 	    button2.setName("2");
+	    */
 	    
 	    
 	    buttonsPanel.add(title, BorderLayout.NORTH);
@@ -62,16 +76,7 @@ public class RightPanel extends JPanel implements ActionListener{
 	    
 	}
 	
-	class SelectButton implements ActionListener
-	{
-		public void actionPerformed(ActionEvent e) {
-			JButton button = (JButton) e.getSource();
-			button.setSelected(true);
-			//String etat = (button.isSelected())? "selectionné" : "déselectionné";
-			int stage = Integer.parseInt(button.getName()); 
-			AIHMTP2.elevator.goToStage(stage);
-		}
-	}
+	
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
