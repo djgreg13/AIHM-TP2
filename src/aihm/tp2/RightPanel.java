@@ -38,9 +38,9 @@ public class RightPanel extends JPanel implements ActionListener, ElevatorContro
 		JPanel buttonsPanel = new JPanel();
 		buttonsPanel.setLayout(new BoxLayout(buttonsPanel, BoxLayout.PAGE_AXIS));
 		
-		ElevatorButton button0 = new ElevatorButton(0);
-		ElevatorButton button1 = new ElevatorButton(1);
-		ElevatorButton button2 = new ElevatorButton(2);
+		ElevatorButton button0 = new ElevatorCabinButton(0);
+		ElevatorButton button1 = new ElevatorCabinButton(1);
+		ElevatorButton button2 = new ElevatorCabinButton(2);
 		
 		button0.setElevator(AIHMTP2.elevator);
 		button1.setElevator(AIHMTP2.elevator);

@@ -12,12 +12,12 @@ import javax.swing.JButton;
 import aihm.elevalor.Elevator;
 import aihm.elevalor.ElevatorController;
 
-public class ElevatorButton extends JButton implements ActionListener, ElevatorController {
-	
-	private int stage;
-	private Elevator elevator;
-	private static List<ElevatorButton> buttonList = new ArrayList<ElevatorButton>();
-
+public abstract class ElevatorButton extends JButton implements ActionListener, ElevatorController {
+    
+    	protected int stage;
+	protected Elevator elevator;
+        protected static List<ElevatorButton> buttonList = new ArrayList<ElevatorButton>();
+        
 	public ElevatorButton(int stage)
 	{
 		super();
@@ -30,8 +30,7 @@ public class ElevatorButton extends JButton implements ActionListener, ElevatorC
 		this.stage = stage;
 		init(callButton);
 	}
-	
-	public void init( boolean callButton)
+    	public void init( boolean callButton)
 	{
 		String buttonImg;
 		if(callButton)
@@ -53,35 +52,18 @@ public class ElevatorButton extends JButton implements ActionListener, ElevatorC
 		this.addActionListener(this);
 		buttonList.add(this);
 	}
-	
-	@Override
-	public void actionPerformed(ActionEvent e) {
-		JButton button = (JButton) e.getSource();
-		//button.setSelected(true);
-		int stage = Integer.parseInt(button.getName()); 
-		elevator.goToStage(stage);
-		
-	}
-
-	public Elevator getElevator() {
+        
+        public Elevator getElevator() {
 		return elevator;
 	}
 
 	public void setElevator(Elevator elevator) {
 		this.elevator = elevator;
 	}
-	
-	public void modelPropertyChange()
-	{
-		this.setSelected(elevator.getStageQueue().get(this.stage));
-	}
-	
-	public void propertyChange()
-	{
-		Iterator<ElevatorButton> it = buttonList.iterator(); 
-		while(it.hasNext()){
-			it.next().modelPropertyChange();
-		}
-	}
-	
+        
+        @Override
+	public abstract void actionPerformed(ActionEvent e);
+                
+	public abstract void propertyChange();
+        public abstract void modelPropertyChange();
 }

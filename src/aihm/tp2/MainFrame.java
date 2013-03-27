@@ -39,10 +39,10 @@ public class MainFrame extends JFrame {
     protected JLabel text1;
     protected JToolBar toolBar;
     
-    protected List<JToggleButton> buttons;
+    protected List<ElevatorButton> buttons;
 
     public MainFrame() {
-        buttons = new ArrayList<JToggleButton> ();
+        buttons = new ArrayList<ElevatorButton> ();
         initComponants();
 
 
@@ -86,9 +86,9 @@ public class MainFrame extends JFrame {
     }
 
     private void addToolBarButtons(JComponent p) {
-            btn0 = new ElevatorButton(0);
-            btn1 = new ElevatorButton(1);
-            btn2 = new ElevatorButton(2);
+            btn0 = new ElevatorCabinButton(0);
+            btn1 = new ElevatorCabinButton(1);
+            btn2 = new ElevatorCabinButton(2);
             
             btn0.setElevator(AIHMTP2.elevator);
             btn1.setElevator(AIHMTP2.elevator);
@@ -102,35 +102,7 @@ public class MainFrame extends JFrame {
             p.add(btn1);
             p.add(btn2);
     }
-
-    class ButtonListener implements ActionListener {
-
-        @Override
-        public void actionPerformed(ActionEvent e) {
-            JToggleButton btn = (JToggleButton) e.getSource();
-            StringBuffer buff = new StringBuffer();
-            buff.append("Button" + btn.getName() + " : ");
-            if (btn.isSelected()) {
-                
-                buff.append("selected");
-            } else {
-                buff.append("unselected");
-            }
-            
-            Iterator<JToggleButton> it = buttons.iterator();
-            while(it.hasNext())
-            {
-                JToggleButton btnc = it.next();
-                if(btnc.getName().equals(btn.getName()))
-                {
-                    btnc.setSelected(btn.isSelected());
-                }
-            }
-            
-            text1.setText(buff.toString());
-        }
-    }
-
+    
     class BarreMenu extends JMenuBar {
 
         private JMenu file = new JMenu("File");
