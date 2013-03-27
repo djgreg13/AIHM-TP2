@@ -130,9 +130,9 @@ public class LeftPanel extends JPanel implements ElevatorController {
         
         private void addButtons(JComponent p)
         {
-            btn0 = new ElevatorCabinButton(0,true);
-            btn1 = new ElevatorCabinButton(1,true);
-            btn2 = new ElevatorCabinButton(2,true);
+            btn0 = new ElevatorCallButton(0,true);
+            btn1 = new ElevatorCallButton(1,true);
+            btn2 = new ElevatorCallButton(2,true);
             
             btn0.setElevator(AIHMTP2.elevator);
             btn1.setElevator(AIHMTP2.elevator);

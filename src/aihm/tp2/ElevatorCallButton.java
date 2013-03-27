@@ -18,13 +18,13 @@ import javax.swing.JButton;
  *
  * @author greg
  */
-public class ElevatorCabinButton extends ElevatorButton {
+public class ElevatorCallButton extends ElevatorButton {
 
-	public ElevatorCabinButton(int stage)
+	public ElevatorCallButton(int stage)
 	{
-		super(stage);
+		super(stage, true);
 	}
-	public ElevatorCabinButton(int stage, boolean callButton)
+	public ElevatorCallButton(int stage, boolean callButton)
 	{
 		super(stage, callButton);
 	}
@@ -34,13 +34,13 @@ public class ElevatorCabinButton extends ElevatorButton {
 		JButton button = (JButton) e.getSource();
 		//button.setSelected(true);
 		int stage = Integer.parseInt(button.getName()); 
-		elevator.goToStage(stage,false);
+		elevator.goToStage(stage,true);
 		
 	}
 	
 	public void modelPropertyChange()
 	{
-		this.setSelected(elevator.getCabinQueue().get(this.stage));
+		this.setSelected(elevator.getCallQueue().get(this.stage));
 	}
 	
 	public void propertyChange()

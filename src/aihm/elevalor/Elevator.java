@@ -14,7 +14,8 @@ public class Elevator {
 	private int actualStage;
 	private boolean up;
 	private Map<Integer, Boolean> stageQueue;
-	
+	private Map<Integer, Boolean> callQueue;
+        private Map<Integer, Boolean> cabinQueue;
 
 	
 	public Elevator()
@@ -25,6 +26,16 @@ public class Elevator {
 		stageQueue.put(2, false);
 		controllers = new ArrayList<Object>();
 		up=false;
+                
+                callQueue = new HashMap();
+		callQueue.put(0, false);
+		callQueue.put(1, false);
+		callQueue.put(2, false);
+                
+                cabinQueue = new HashMap();
+		cabinQueue.put(0, false);
+		cabinQueue.put(1, false);
+		cabinQueue.put(2, false);
 	}
 
 	public void addController(Object controller)
@@ -41,6 +52,16 @@ public class Elevator {
 	{
 		return this.stageQueue;
 	}
+        
+	public Map<Integer, Boolean> getCabinQueue()
+	{
+		return this.cabinQueue;
+	}
+        
+	public Map<Integer, Boolean> getCallQueue()
+	{
+		return this.callQueue;
+	}
 	
 	
 	public int getActualStage() 
@@ -51,6 +72,9 @@ public class Elevator {
 	public void setActualStage(int stage) 
 	{
 		stageQueue.put(stage, false);
+                cabinQueue.put(stage, false);
+                callQueue.put(stage, false);
+                
 		up = (stage>actualStage)? true : false;
 		System.out.println("Je suis a l'etage "+stage);
 		actualStage=stage;
@@ -86,12 +110,21 @@ public class Elevator {
 		return actualStage;
 	}
 	
-	public void goToStage(int stage)
+	private void goToStage(int stage)
 	{
 		stageQueue.put(stage, true);
 		System.out.println("J'appel l'etage "+stage);
 		//setActualStage(stage);
 		propertyChange();
+	}
+        
+        public void goToStage(int stage, boolean callButton)
+	{
+                if(callButton)
+                    callQueue.put(stage,true);
+                else
+                    cabinQueue.put(stage,true);
+                this.goToStage(stage);
 	}
 	
 	public void propertyChange()
