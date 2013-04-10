@@ -9,12 +9,16 @@ import java.util.Map;
 import aihm.tp2.ElevatorButton;
 
 public class Elevator {
-	
 	private int actualStage;
 	private boolean up;
 	private Map<Integer, Boolean> stageQueue;
 	private Map<Integer, Boolean> callQueue;
         private Map<Integer, Boolean> cabinQueue;
+        
+        public static enum stateList {
+            READY, MOVE, DOOR_OPEN, DOOR_CLOSE, OPEN
+        }
+        private stateList status;
 
 	
 	public Elevator()
@@ -34,6 +38,8 @@ public class Elevator {
 		cabinQueue.put(0, false);
 		cabinQueue.put(1, false);
 		cabinQueue.put(2, false);
+                
+                status = stateList.READY;
 	}
 	
 	public Map<Integer, Boolean> getStageQueue()
@@ -50,8 +56,15 @@ public class Elevator {
 	{
 		return this.callQueue;
 	}
-	
-	
+
+        public stateList getStatus() {
+            return status;
+        }
+
+        public void setStatus(stateList status) {
+            this.status = status;
+        }
+        
 	public int getActualStage() 
 	{
 		return actualStage;
@@ -107,11 +120,14 @@ public class Elevator {
         
         public void goToStage(int stage, boolean callButton)
 	{
+            if(this.getActualStage()!=stage || status != stateList.READY)
+            {
                 if(callButton)
                     callQueue.put(stage,true);
                 else
                     cabinQueue.put(stage,true);
-                this.goToStage(stage);
+            }
+            this.goToStage(stage);
 	}
 
 }

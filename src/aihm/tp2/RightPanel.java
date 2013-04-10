@@ -33,7 +33,7 @@ public class RightPanel extends JPanel implements ActionListener{
 	{
 		JLabel title = new JLabel("Cabine");
 		this.elevatorStage = new JTextField("0");
-		
+		AIHMTP2.controller.addView(elevatorStage);
 		
 		JPanel buttonsPanel = new JPanel();
 		buttonsPanel.setLayout(new BoxLayout(buttonsPanel, BoxLayout.PAGE_AXIS));

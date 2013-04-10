@@ -34,7 +34,7 @@ public class ElevatorCallButton extends ElevatorButton {
 		JButton button = (JButton) e.getSource();
 		//button.setSelected(true);
 		int stage = Integer.parseInt(button.getName()); 
-		elevator.goToStage(stage,true);
+		controller.goToStage(stage,true);
 		
 	}
 	

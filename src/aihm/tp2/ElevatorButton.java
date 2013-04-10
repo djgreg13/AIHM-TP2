@@ -65,7 +65,14 @@ public abstract class ElevatorButton extends JButton implements ActionListener {
         public void setElevatorController(ElevatorController controller)
         {
             this.controller=controller;
+            controller.addView(this);
         }
+
+        public int getStage() {
+            return stage;
+        }
+        
+        
         
         @Override
 	public abstract void actionPerformed(ActionEvent e);
