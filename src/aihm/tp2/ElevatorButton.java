@@ -12,10 +12,11 @@ import javax.swing.JButton;
 import aihm.elevalor.Elevator;
 import aihm.elevalor.ElevatorController;
 
-public abstract class ElevatorButton extends JButton implements ActionListener, ElevatorController {
+public abstract class ElevatorButton extends JButton implements ActionListener {
     
     	protected int stage;
 	protected Elevator elevator;
+        protected ElevatorController controller;
         protected static List<ElevatorButton> buttonList = new ArrayList<ElevatorButton>();
         
 	public ElevatorButton(int stage)
@@ -61,9 +62,18 @@ public abstract class ElevatorButton extends JButton implements ActionListener, 
 		this.elevator = elevator;
 	}
         
+        public void setElevatorController(ElevatorController controller)
+        {
+            this.controller=controller;
+            controller.addView(this);
+        }
+
+        public int getStage() {
+            return stage;
+        }
+        
+        
+        
         @Override
 	public abstract void actionPerformed(ActionEvent e);
-                
-	public abstract void propertyChange();
-        public abstract void modelPropertyChange();
 }

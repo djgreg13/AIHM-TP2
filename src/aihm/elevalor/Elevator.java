@@ -9,13 +9,16 @@ import java.util.Map;
 import aihm.tp2.ElevatorButton;
 
 public class Elevator {
-	
-	private List<Object> controllers;
 	private int actualStage;
 	private boolean up;
 	private Map<Integer, Boolean> stageQueue;
 	private Map<Integer, Boolean> callQueue;
         private Map<Integer, Boolean> cabinQueue;
+        
+        public static enum stateList {
+            READY, MOVE, DOOR_OPEN, DOOR_CLOSE, OPEN
+        }
+        private stateList status;
 
 	
 	public Elevator()
@@ -24,7 +27,6 @@ public class Elevator {
 		stageQueue.put(0, false);
 		stageQueue.put(1, false);
 		stageQueue.put(2, false);
-		controllers = new ArrayList<Object>();
 		up=false;
                 
                 callQueue = new HashMap();
@@ -36,16 +38,8 @@ public class Elevator {
 		cabinQueue.put(0, false);
 		cabinQueue.put(1, false);
 		cabinQueue.put(2, false);
-	}
-
-	public void addController(Object controller)
-	{
-		this.controllers.add(controller);
-	}
-	
-	public void removeController(Object controller)
-	{
-		this.controllers.remove(controller);
+                
+                status = stateList.READY;
 	}
 	
 	public Map<Integer, Boolean> getStageQueue()
@@ -62,8 +56,15 @@ public class Elevator {
 	{
 		return this.callQueue;
 	}
-	
-	
+
+        public stateList getStatus() {
+            return status;
+        }
+
+        public void setStatus(stateList status) {
+            this.status = status;
+        }
+        
 	public int getActualStage() 
 	{
 		return actualStage;
@@ -115,26 +116,18 @@ public class Elevator {
 		stageQueue.put(stage, true);
 		System.out.println("J'appel l'etage "+stage);
 		//setActualStage(stage);
-		propertyChange();
 	}
         
         public void goToStage(int stage, boolean callButton)
 	{
+            if(this.getActualStage()!=stage || status != stateList.READY)
+            {
                 if(callButton)
                     callQueue.put(stage,true);
                 else
                     cabinQueue.put(stage,true);
-                this.goToStage(stage);
-	}
-	
-	public void propertyChange()
-	{
-		Iterator<Object> it = controllers.iterator(); 
-		while(it.hasNext())
-		{
-			ElevatorController controller = (ElevatorController) it.next();
-			controller.propertyChange();
-		}
+            }
+            this.goToStage(stage);
 	}
 
 }

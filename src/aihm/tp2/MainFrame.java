@@ -73,7 +73,6 @@ public class MainFrame extends JFrame {
         LeftPanel pg = new LeftPanel();
         panel.setLeftComponent(pg);
         pg.setElevator(AIHMTP2.elevator);
-        AIHMTP2.elevator.addController(pg);
         
         /*pg.setMinimumSize(new Dimension(100,400));
         panel.setLeftComponent(pg);
@@ -94,9 +93,9 @@ public class MainFrame extends JFrame {
             btn1.setElevator(AIHMTP2.elevator);
             btn2.setElevator(AIHMTP2.elevator);   
             
-            AIHMTP2.elevator.addController(btn0);
-            AIHMTP2.elevator.addController(btn1);
-            AIHMTP2.elevator.addController(btn2);
+            btn0.setElevatorController(AIHMTP2.controller);
+            btn1.setElevatorController(AIHMTP2.controller);
+            btn2.setElevatorController(AIHMTP2.controller);
 
             p.add(btn0);
             p.add(btn1);

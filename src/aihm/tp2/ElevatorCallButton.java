@@ -34,21 +34,8 @@ public class ElevatorCallButton extends ElevatorButton {
 		JButton button = (JButton) e.getSource();
 		//button.setSelected(true);
 		int stage = Integer.parseInt(button.getName()); 
-		elevator.goToStage(stage,true);
+		controller.goToStage(stage,true);
 		
-	}
-	
-	public void modelPropertyChange()
-	{
-		this.setSelected(elevator.getCallQueue().get(this.stage));
-	}
-	
-	public void propertyChange()
-	{
-		Iterator<ElevatorButton> it = buttonList.iterator(); 
-		while(it.hasNext()){
-			it.next().modelPropertyChange();
-		}
 	}
 	
 }
