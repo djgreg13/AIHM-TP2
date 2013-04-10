@@ -34,21 +34,9 @@ public class ElevatorCabinButton extends ElevatorButton {
 		JButton button = (JButton) e.getSource();
 		//button.setSelected(true);
 		int stage = Integer.parseInt(button.getName()); 
-		elevator.goToStage(stage,false);
+		controller.goToStage(stage,false);
 		
 	}
 	
-	public void modelPropertyChange()
-	{
-		this.setSelected(elevator.getCabinQueue().get(this.stage));
-	}
-	
-	public void propertyChange()
-	{
-		Iterator<ElevatorButton> it = buttonList.iterator(); 
-		while(it.hasNext()){
-			it.next().modelPropertyChange();
-		}
-	}
 	
 }

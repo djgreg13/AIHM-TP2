@@ -12,6 +12,7 @@ import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 
 import aihm.elevalor.Elevator;
+import aihm.elevalor.ElevatorController;
 
 /**
  *
@@ -19,14 +20,16 @@ import aihm.elevalor.Elevator;
  */
 public class AIHMTP2 {
 	
-	public static Elevator elevator = new Elevator();
+	public static Elevator elevator;
+        public static ElevatorController controller;
 
     /**
      * @param args the command line arguments
      */
     public static void main(String[] args) {
     	
-    	
+        elevator = new Elevator();
+    	controller = new ElevatorController(elevator);
     	
         SwingUtilities.invokeLater(new Runnable() {
             @Override

@@ -26,7 +26,7 @@ import javax.swing.Timer;
  *
  * @author greg
  */
-public class LeftPanel extends JPanel implements ElevatorController {
+public class LeftPanel extends JPanel {
     private Elevator elevator;
     private int MAXETAGE = 2;
     private int etage = 0;
@@ -60,11 +60,6 @@ public class LeftPanel extends JPanel implements ElevatorController {
         JPanel elevator = new Child();
         this.add(elevator, BorderLayout.CENTER);
     }
-
-        @Override
-        public void propertyChange() {
-            this.modelPropertyChange();
-        }
     
     	public void modelPropertyChange()
 	{
@@ -88,7 +83,7 @@ public class LeftPanel extends JPanel implements ElevatorController {
 
         @Override
         public void actionPerformed(ActionEvent e) {
-            i++;
+            /*i++;
             if(etage<nextEtage)
             {
                 offset=-i;
@@ -110,7 +105,7 @@ public class LeftPanel extends JPanel implements ElevatorController {
                 elevator.setActualStage(etage);
                 elevator.propertyChange();
                 repaint();
-            }
+            }*/
         }
             
         }
@@ -138,9 +133,9 @@ public class LeftPanel extends JPanel implements ElevatorController {
             btn1.setElevator(AIHMTP2.elevator);
             btn2.setElevator(AIHMTP2.elevator);   
             
-            AIHMTP2.elevator.addController(btn0);
-            AIHMTP2.elevator.addController(btn1);
-            AIHMTP2.elevator.addController(btn2);
+            btn0.setElevatorController(AIHMTP2.controller);
+            btn1.setElevatorController(AIHMTP2.controller);
+            btn2.setElevatorController(AIHMTP2.controller);
 
             p.add(btn0);
             p.add(btn1);

@@ -10,7 +10,6 @@ import aihm.tp2.ElevatorButton;
 
 public class Elevator {
 	
-	private List<Object> controllers;
 	private int actualStage;
 	private boolean up;
 	private Map<Integer, Boolean> stageQueue;
@@ -24,7 +23,6 @@ public class Elevator {
 		stageQueue.put(0, false);
 		stageQueue.put(1, false);
 		stageQueue.put(2, false);
-		controllers = new ArrayList<Object>();
 		up=false;
                 
                 callQueue = new HashMap();
@@ -36,16 +34,6 @@ public class Elevator {
 		cabinQueue.put(0, false);
 		cabinQueue.put(1, false);
 		cabinQueue.put(2, false);
-	}
-
-	public void addController(Object controller)
-	{
-		this.controllers.add(controller);
-	}
-	
-	public void removeController(Object controller)
-	{
-		this.controllers.remove(controller);
 	}
 	
 	public Map<Integer, Boolean> getStageQueue()
@@ -115,7 +103,6 @@ public class Elevator {
 		stageQueue.put(stage, true);
 		System.out.println("J'appel l'etage "+stage);
 		//setActualStage(stage);
-		propertyChange();
 	}
         
         public void goToStage(int stage, boolean callButton)
@@ -125,16 +112,6 @@ public class Elevator {
                 else
                     cabinQueue.put(stage,true);
                 this.goToStage(stage);
-	}
-	
-	public void propertyChange()
-	{
-		Iterator<Object> it = controllers.iterator(); 
-		while(it.hasNext())
-		{
-			ElevatorController controller = (ElevatorController) it.next();
-			controller.propertyChange();
-		}
 	}
 
 }

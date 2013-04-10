@@ -38,17 +38,4 @@ public class ElevatorCallButton extends ElevatorButton {
 		
 	}
 	
-	public void modelPropertyChange()
-	{
-		this.setSelected(elevator.getCallQueue().get(this.stage));
-	}
-	
-	public void propertyChange()
-	{
-		Iterator<ElevatorButton> it = buttonList.iterator(); 
-		while(it.hasNext()){
-			it.next().modelPropertyChange();
-		}
-	}
-	
 }

@@ -20,7 +20,7 @@ import aihm.elevalor.ElevatorController;
  *
  * @author greg
  */
-public class RightPanel extends JPanel implements ActionListener, ElevatorController{
+public class RightPanel extends JPanel implements ActionListener{
 	
 	private JTextField elevatorStage;
 	
@@ -46,9 +46,9 @@ public class RightPanel extends JPanel implements ActionListener, ElevatorContro
 		button1.setElevator(AIHMTP2.elevator);
 		button2.setElevator(AIHMTP2.elevator);
 		
-		AIHMTP2.elevator.addController(button0);
-		AIHMTP2.elevator.addController(button1);
-		AIHMTP2.elevator.addController(button2);
+            button0.setElevatorController(AIHMTP2.controller);
+            button1.setElevatorController(AIHMTP2.controller);
+            button2.setElevatorController(AIHMTP2.controller);
 	    
 	    buttonsPanel.add(title, BorderLayout.NORTH);
 		buttonsPanel.add(this.elevatorStage);
@@ -57,7 +57,7 @@ public class RightPanel extends JPanel implements ActionListener, ElevatorContro
 	    buttonsPanel.add(button0);
 	    this.add(buttonsPanel, BorderLayout.CENTER);
 	    
-	    AIHMTP2.elevator.addController(this);
+	    //AIHMTP2.elevator.addController(this);
 	}
 	
 	
@@ -66,11 +66,6 @@ public class RightPanel extends JPanel implements ActionListener, ElevatorContro
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
 		
-	}
-	
-	public void propertyChange()
-	{
-		this.elevatorStage.setText(""+AIHMTP2.elevator.getActualStage());
-	}
+        }
     
 }
