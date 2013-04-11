@@ -104,7 +104,7 @@ public class LeftPanel extends JPanel {
                 timer = new Timer(10, move);
             }
             timer.start();
-            controller.SetActualStage(0);
+            controller.SetActualStage(etage);
             controller.setStatus(Elevator.stateList.DOOR_OPEN);
         }
     }
@@ -171,7 +171,7 @@ public class LeftPanel extends JPanel {
                 }
             } else if (elevator.getStatus() == Elevator.stateList.OPEN) {
                 if (compteur++ < 100) {
-                    System.out.println("stay" + compteur);
+                    //System.out.println("stay" + compteur);
                 } else {
                     compteur = 0;
                     controller.setStatus(Elevator.stateList.DOOR_CLOSE);
