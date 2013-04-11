@@ -88,4 +88,10 @@ public class ElevatorController
         elevator.setStatus(nextStatus);
         this.modelPropertyChange();
     }
+    
+    public void setUp(boolean up)
+    {
+        elevator.setUp(up);
+        //this.modelPropertyChange();
+    }
 }

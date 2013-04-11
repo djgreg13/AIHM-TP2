@@ -89,9 +89,11 @@ public class LeftPanel extends JPanel {
             if (nextEtage > this.etage) {
                 System.out.println("Je dois monter");
                 controller.setStatus(Elevator.stateList.MOVE);
+                controller.setUp(true);
             } else if (nextEtage < this.etage) {
                 System.out.println("Je dois descendre");
                 controller.setStatus(Elevator.stateList.MOVE);
+                                controller.setUp(false);
             }
             EventMove move = new EventMove();
             if (timer == null) {
@@ -106,6 +108,10 @@ public class LeftPanel extends JPanel {
             timer.start();
             controller.SetActualStage(etage);
             controller.setStatus(Elevator.stateList.DOOR_OPEN);
+        } else if (nextEtage != etage)
+        {
+            System.out.println("etageencourspapele");
+            this.nextEtage = nextEtage;
         }
     }
 
@@ -146,12 +152,13 @@ public class LeftPanel extends JPanel {
              repaint();
              }*/
             maxCompteur = Math.abs(etage - nextEtage);
+            //System.out.println("Etage :"+etage+" - Next etage:"+nextEtage);
             if (elevator.getStatus() == Elevator.stateList.MOVE) {
-                if (compteur++ < 100 * maxCompteur) {
+                if (Math.abs(offset) < 100 * maxCompteur) {
                     if (nextEtage < etage) {
-                        offset = (compteur * 100) / 100;
+                        offset = (compteur++ * 100) / 100;
                     } else {
-                        offset = -((compteur * 100) / 100);
+                        offset = -((compteur++ * 100) / 100);
                     }
                     repaint();
                 } else {

@@ -76,10 +76,15 @@ public class Elevator {
                 cabinQueue.put(stage, false);
                 callQueue.put(stage, false);
                 
-		up = (stage>actualStage)? true : false;
+		//up = (stage>actualStage)? true : false;
 		System.out.println("Je suis a l'etage "+stage);
 		actualStage=stage;
 	}
+
+        public void setUp(boolean up) {
+            this.up = up;
+        }
+        
 	
 	public int getNextStage()
 	{
@@ -87,16 +92,18 @@ public class Elevator {
 		{
 			//Si on est entrain de monter on regarde si des etages supérieurs
 			//ont été appélés, dans ces cas on va aux étages sup.
+                    System.out.println("up");
 			for (Integer stage : stageQueue.keySet()) {
 				if(stageQueue.get(stage)&&actualStage<stage)
 					return stage;
 			}
 		}else{
+                    System.out.println("down");
 			//Si on est entrain de descendre on regarde si des etages inférieurs
 			//ont été appélés, dans ces cas on va aux étages inf.
-			for (Integer stage : stageQueue.keySet()) {
-				if(stageQueue.get(stage)&&actualStage>stage)
-					return stage;
+			for (int i = stageQueue.size()-1 ; i>0 ; i--) {
+				if(stageQueue.get(i)&&actualStage>i)
+					return i;
 			}
 		}
 		
