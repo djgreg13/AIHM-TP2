@@ -4,17 +4,15 @@ import aihm.tp2.ElevatorButton;
 import aihm.tp2.ElevatorCabinButton;
 import aihm.tp2.ElevatorCallButton;
 import aihm.tp2.LeftPanel;
-import aihm.tp2.RightPanel;
 import java.util.ArrayList;
 import java.util.List;
-import javax.swing.JFormattedTextField;
 import javax.swing.JTextField;
 
 public class ElevatorController
 {
 	private Elevator elevator;
-        private List<ElevatorButton> buttons = new ArrayList<ElevatorButton>();
-        private List<JTextField> textfields = new ArrayList<JTextField>();
+        private List<ElevatorButton> buttons = new ArrayList<>();
+        private List<JTextField> textfields = new ArrayList<>();
         private List<LeftPanel> animations = new ArrayList<>();
 
         public ElevatorController(Elevator elevator)
@@ -44,7 +42,7 @@ public class ElevatorController
             /* Mise à jour des boutons */
             for(ElevatorButton button : buttons)
             {
-                boolean selected = false;
+                boolean selected;
                 if(button instanceof ElevatorCabinButton)
                 {
                     selected = elevator.getCabinQueue().get(button.getStage());

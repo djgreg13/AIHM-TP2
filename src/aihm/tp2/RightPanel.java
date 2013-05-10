@@ -8,13 +8,10 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.BoxLayout;
-import javax.swing.ImageIcon;
-import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-import aihm.elevalor.ElevatorController;
 
 /**
  *
@@ -29,7 +26,7 @@ public class RightPanel extends JPanel implements ActionListener{
 		super();
 		init();
 	}
-	public void init()
+	public final void init()
 	{
 		JLabel title = new JLabel("Cabine");
 		this.elevatorStage = new JTextField("0");

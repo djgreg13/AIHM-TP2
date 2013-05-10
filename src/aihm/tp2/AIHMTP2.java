@@ -45,13 +45,7 @@ public class AIHMTP2 {
 
                     //frame.setSize(400,200);
                     frame.setVisible(true);
-                } catch (ClassNotFoundException ex) {
-                    Logger.getLogger(AIHMTP2.class.getName()).log(Level.SEVERE, null, ex);
-                } catch (InstantiationException ex) {
-                    Logger.getLogger(AIHMTP2.class.getName()).log(Level.SEVERE, null, ex);
-                } catch (IllegalAccessException ex) {
-                    Logger.getLogger(AIHMTP2.class.getName()).log(Level.SEVERE, null, ex);
-                } catch (UnsupportedLookAndFeelException ex) {
+                } catch (        ClassNotFoundException | InstantiationException | IllegalAccessException | UnsupportedLookAndFeelException ex) {
                     Logger.getLogger(AIHMTP2.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }

@@ -3,7 +3,6 @@ package aihm.tp2;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 import javax.swing.ImageIcon;
@@ -17,13 +16,13 @@ public abstract class ElevatorButton extends JButton implements ActionListener {
     	protected int stage;
 	protected Elevator elevator;
         protected ElevatorController controller;
-        protected static List<ElevatorButton> buttonList = new ArrayList<ElevatorButton>();
+        protected static List<ElevatorButton> buttonList = new ArrayList<>();
         
 	public ElevatorButton(int stage)
 	{
 		super();
 		this.stage = stage;
-		init(false);
+		this.init(false);
 	}
 	public ElevatorButton(int stage, boolean callButton)
 	{
@@ -31,7 +30,7 @@ public abstract class ElevatorButton extends JButton implements ActionListener {
 		this.stage = stage;
 		init(callButton);
 	}
-    	public void init( boolean callButton)
+    	public final void init(boolean callButton)
 	{
 		String buttonImg;
 		if(callButton)

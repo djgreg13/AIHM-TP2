@@ -12,15 +12,9 @@ import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.sound.midi.ControllerEventListener;
-import javax.swing.ImageIcon;
-import javax.swing.JButton;
 import javax.swing.JComponent;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JToggleButton;
 import javax.swing.Timer;
 
 /**
@@ -34,7 +28,6 @@ public class LeftPanel extends JPanel {
     private int MAXETAGE = 2;
     private int etage = 0;
     private int nextEtage = 0;
-    private int compteur = 0;
     private int maxCompteur = 0;
     private int offset = 0;
     private int porteOffset = 0;
@@ -43,11 +36,11 @@ public class LeftPanel extends JPanel {
     LeftPanel() {
         super();
         init();
-        controller = AIHMTP2.controller;
-        controller.addView(this);
     }
 
     private void init() {
+        controller = AIHMTP2.controller;
+        controller.addView(this);
         this.setLayout(new BorderLayout());
 
         //Centrage titre
@@ -65,8 +58,8 @@ public class LeftPanel extends JPanel {
 
         this.add(titlep, BorderLayout.NORTH);
 
-        JPanel elevator = new Child();
-        this.add(elevator, BorderLayout.CENTER);
+        JPanel child = new Child();
+        this.add(child, BorderLayout.CENTER);
     }
 
     public Elevator getElevator() {
@@ -83,14 +76,14 @@ public class LeftPanel extends JPanel {
 
     /*Partie controleur */
     public void propertyChange() {
-        int nextEtage = elevator.getNextStage();
-        if (elevator.getStatus() == Elevator.stateList.READY && nextEtage != elevator.getActualStage()) {
-            this.nextEtage = nextEtage;
-            if (nextEtage > this.etage) {
+        int nextStage = elevator.getNextStage();
+        if (elevator.getStatus() == Elevator.stateList.READY && nextStage != elevator.getActualStage()) {
+            this.nextEtage = nextStage;
+            if (nextStage > this.etage) {
                 System.out.println("Je dois monter");
                 controller.setStatus(Elevator.stateList.MOVE);
                 controller.setUp(true);
-            } else if (nextEtage < this.etage) {
+            } else if (nextStage < this.etage) {
                 System.out.println("Je dois descendre");
                 controller.setStatus(Elevator.stateList.MOVE);
                                 controller.setUp(false);
@@ -100,7 +93,7 @@ public class LeftPanel extends JPanel {
                 timer = new Timer(10, move);
             }
             timer.start();
-        } else if (elevator.getStatus() == Elevator.stateList.READY && nextEtage == etage && elevator.getStageQueue().get(etage)) {
+        } else if (elevator.getStatus() == Elevator.stateList.READY && nextStage == etage && elevator.getStageQueue().get(etage)) {
             EventMove move = new EventMove();
             if (timer == null) {
                 timer = new Timer(10, move);
@@ -108,10 +101,10 @@ public class LeftPanel extends JPanel {
             timer.start();
             controller.SetActualStage(etage);
             controller.setStatus(Elevator.stateList.DOOR_OPEN);
-        } else if (nextEtage != etage)
+        } else if (nextStage != etage)
         {
             System.out.println("etageencourspapele");
-            this.nextEtage = nextEtage;
+            this.nextEtage = nextStage;
         }
     }
 

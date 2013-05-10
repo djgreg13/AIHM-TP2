@@ -4,14 +4,7 @@
  */
 package aihm.tp2;
 
-import aihm.elevalor.Elevator;
-import aihm.elevalor.ElevatorController;
 import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
-import javax.swing.ImageIcon;
 import javax.swing.JButton;
 
 /**
@@ -33,8 +26,8 @@ public class ElevatorCabinButton extends ElevatorButton {
 	public void actionPerformed(ActionEvent e) {
 		JButton button = (JButton) e.getSource();
 		//button.setSelected(true);
-		int stage = Integer.parseInt(button.getName()); 
-		controller.goToStage(stage,false);
+		int stagetmp = Integer.parseInt(button.getName()); 
+		controller.goToStage(stagetmp,false);
 		
 	}
 	

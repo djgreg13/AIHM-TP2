@@ -1,12 +1,8 @@
 package aihm.elevalor;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Iterator;
-import java.util.List;
 import java.util.Map;
 
-import aihm.tp2.ElevatorButton;
 
 public class Elevator {
 	private int actualStage;
